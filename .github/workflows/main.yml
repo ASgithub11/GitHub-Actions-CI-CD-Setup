@@ -31,7 +31,8 @@ jobs:
         
       # Run lint
       - name: Run Lint
-        run: npm run lint
+        run: |
+        cd client && npm run lint
 
       # Run build
       - name: Run Build
