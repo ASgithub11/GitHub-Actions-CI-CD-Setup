@@ -18,7 +18,7 @@ jobs:
     # Define the steps to be executed in the job
     steps:
       # Checkout the code from the repository
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # Define a step named "Test"
       - name: Test
@@ -36,4 +36,4 @@ jobs:
           DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         # Run the deployment command
         run: |
-          curl "$DEPLOY_URL"
+          curl "$deploy_url"
