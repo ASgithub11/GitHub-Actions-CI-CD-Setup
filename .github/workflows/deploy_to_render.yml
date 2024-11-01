@@ -1,5 +1,7 @@
-name: Deploy To Render
+# Name of the GitHub Actions workflow
+name: Deploy to Render
 
+# Trigger the workflow on push and pull request events to the main branch
 on:
   push:
     branches: [main]
@@ -8,27 +10,39 @@ on:
       - main
 
 jobs:
-  ci:
-    name: Deploy To Render
+  # Define a job named "deploy"
+  deploy:
+    # Specify the operating system to run the job on
     runs-on: ubuntu-latest
-    services:
-      mongodb:
-        image: mongo:5.0 # Specify a stable version
-        ports:
-          - 27017:27017
-        options: >-
-          --health-cmd="mongo --eval 'db.runCommand({ ping: 1 })'"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
+    
+    # Define the steps to be executed in the job
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        # Checkout the code from the repository
+        uses: actions/checkout@v3
+      
+      # Define a step named "Node.js"
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+            node-version: '20'
+      
+      # Install dependencies
+      - name : Install dependencies
+        run: npm install
+      
+      # Build the app
+      - name: Build App
+        run: npm run build
+
+      # Define a step named "Deploy"
       - name: Deploy
         # Only run this step if the branch is main
         if: github.ref == 'refs/heads/main'
+        # Set an environment variable with the deployment URL from secrets
         env:
-          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        # Run the deployment command
         run: |
-          curl "$deploy_url"
-          
+          curl "$DEPLOY_URL"
+        
