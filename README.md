@@ -95,6 +95,12 @@ git push origin <branch-name>
 
 ## Screenshots
 
+![Alt text](Assets/images/Screenshot-1.png)
+
+Link to the deployed site:
+
+https://github-actions-ci-cd-setup.onrender.com
+
 ## License
 
 Copyright (c) 2024 ASgithub11
