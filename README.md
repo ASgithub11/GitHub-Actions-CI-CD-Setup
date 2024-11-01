@@ -95,7 +95,11 @@ git push origin <branch-name>
 
 ## Screenshots
 
-![Alt text](Assets/images/Screenshot-1.png)
+The following images shows the successful tests:
+
+![Alt text](Assets/images/checking_tests.png)
+
+![Alt text](Assets/images/deploy_to_render.png)
 
 Link to the deployed site:
 
